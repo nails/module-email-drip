@@ -1,0 +1,50 @@
+{
+    "name": "nailsapp/module-email-drip",
+    "keywords": ["Nails", "Shed Collective", "CodeIgniter", "Email Drip Campaign Module", "Email", "Drip Campaign"],
+    "homepage": "http://nailsapp.co.uk/modules/email-drip",
+    "description": "This is the \"Email Drip Campaign\" module for Nails.",
+    "license": "MIT",
+    "authors":
+    [
+        {
+            "name": "Pablo de la Pena",
+            "email": "p@nailsapp.co.uk",
+            "homepage": "http://nailsapp.co.uk",
+            "role": "Developer"
+        },
+        {
+            "name": "Gary Duncan",
+            "email": "g@nailsapp.co.uk",
+            "homepage": "http://nailsapp.co.uk",
+            "role": "Developer"
+        }
+    ],
+    "support":
+    {
+        "email": "hello@nailsapp.co.uk"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require":
+    {
+        "nailsapp/common": "dev-develop",
+        "nailsapp/module-email": "dev-develop",
+        "nailsapp/module-cron": "dev-develop"
+    },
+    "require-dev":
+    {
+        "phpunit/phpunit": "4.*"
+    },
+    "autoload":
+    {
+        "psr-4": {"Nails\\EmailDrip\\": "src/"}
+    },
+    "extra":
+    {
+        "nails" :
+        {
+            "moduleName": "emaildrip",
+            "type": "module"
+        }
+    }
+}
