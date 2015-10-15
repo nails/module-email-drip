@@ -184,7 +184,7 @@ class Campaign extends BaseAdmin
         $this->asset->load('knockout/dist/knockout.js', 'NAILS-BOWER');
         $this->asset->load('nails.admin.emaildrip.campaign.min.js', 'NAILS');
         $this->asset->inline(
-            'ko.applyBindings(new dripCampaignEdit(' . json_encode($this->data['campaign']->emails) . '));',
+            'ko.applyBindings(new dripCampaignEdit([]));',
             'JS'
         );
 
