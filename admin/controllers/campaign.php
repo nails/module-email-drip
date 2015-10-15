@@ -182,8 +182,12 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $this->asset->load('knockout/dist/knockout.js', 'NAILS-BOWER');
-        $this->asset->load('mustache.js/mustache.js', 'NAILS-BOWER');
         $this->asset->load('nails.admin.emaildrip.campaign.min.js', 'NAILS');
+        $this->asset->inline(
+            'ko.applyBindings(new dripCampaignEdit(' . json_encode($this->data['campaign']->emails) . '));',
+            'JS'
+        );
+
         \Nails\Admin\Helper::loadView('edit');
     }
 
@@ -254,7 +258,6 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $this->asset->load('knockout/dist/knockout.js', 'NAILS-BOWER');
-        $this->asset->load('mustache.js/mustache.js', 'NAILS-BOWER');
         $this->asset->load('nails.admin.emaildrip.campaign.min.js', 'NAILS');
         $this->asset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($this->data['campaign']->emails) . '));',
