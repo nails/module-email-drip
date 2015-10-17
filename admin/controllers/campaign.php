@@ -13,6 +13,7 @@
 namespace Nails\Admin\EmailDrip;
 
 use Nails\Factory;
+use Nails\Admin\Helper;
 use Nails\EmailDrip\Controller\BaseAdmin;
 
 class Campaign extends BaseAdmin
@@ -107,13 +108,13 @@ class Campaign extends BaseAdmin
         $this->data['campaigns'] = $oCampaignModel->get_all($page, $perPage, $data);
 
         //  Set Search and Pagination objects for the view
-        $this->data['search']     = \Nails\Admin\Helper::searchObject(true, $sortColumns, $sortOn, $sortOrder, $perPage, $keywords);
-        $this->data['pagination'] = \Nails\Admin\Helper::paginationObject($page, $perPage, $totalRows);
+        $this->data['search']     = Helper::searchObject(true, $sortColumns, $sortOn, $sortOrder, $perPage, $keywords);
+        $this->data['pagination'] = Helper::paginationObject($page, $perPage, $totalRows);
 
         //  Add a header button
         if (userHasPermission('admin:emaildrip:campaign:create')) {
 
-             \Nails\Admin\Helper::addHeaderButton(
+             Helper::addHeaderButton(
                 'admin/emaildrip/campaign/create',
                 'Create Drip Campaign'
             );
@@ -121,7 +122,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        \Nails\Admin\Helper::loadView('index');
+        Helper::loadView('index');
     }
 
     // --------------------------------------------------------------------------
@@ -188,7 +189,7 @@ class Campaign extends BaseAdmin
             'JS'
         );
 
-        \Nails\Admin\Helper::loadView('edit');
+        Helper::loadView('edit');
     }
 
     // --------------------------------------------------------------------------
@@ -264,7 +265,7 @@ class Campaign extends BaseAdmin
             'JS'
         );
 
-        \Nails\Admin\Helper::loadView('edit');
+        Helper::loadView('edit');
     }
 
     // --------------------------------------------------------------------------
