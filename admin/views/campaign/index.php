@@ -56,7 +56,7 @@
                                     echo anchor(
                                         'admin/emaildrip/campaign/delete/' . $oCampaign->id,
                                         lang('action_delete'),
-                                        'class="awesome red small confirm" data-title="Are you sure?" data-body="You cannot undo this action"'
+                                        'class="awesome red small confirm" data-body="You cannot undo this action"'
                                     );
                                 }
 
