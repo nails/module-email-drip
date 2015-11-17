@@ -147,15 +147,14 @@ class Campaign extends BaseAdmin
 
         if ($this->input->post()) {
 
-            $this->load->library('form_validation');
+            $oFormValidation = Factory::service('FormValidation');
+            $oFormValidation->set_rules('quote', '', 'xss_clean|required');
+            $oFormValidation->set_rules('quote_by', '', 'xss_clean|required');
+            $oFormValidation->set_rules('quote_dated', '', 'xss_clean|required');
 
-            $this->form_validation->set_rules('quote', '', 'xss_clean|required');
-            $this->form_validation->set_rules('quote_by', '', 'xss_clean|required');
-            $this->form_validation->set_rules('quote_dated', '', 'xss_clean|required');
+            $oFormValidation->set_message('required', lang('fv_required'));
 
-            $this->form_validation->set_message('required', lang('fv_required'));
-
-            if ($this->form_validation->run()) {
+            if ($oFormValidation->run()) {
 
                 $data                = array();
                 $data['quote']       = $this->input->post('quote');
@@ -225,15 +224,14 @@ class Campaign extends BaseAdmin
 
         if ($this->input->post()) {
 
-            $this->load->library('form_validation');
+            $oFormValidation = Factory::service('FormValidation');
+            $oFormValidation->set_rules('quote', '', 'xss_clean|required');
+            $oFormValidation->set_rules('quote_by', '', 'xss_clean|required');
+            $oFormValidation->set_rules('quote_dated', '', 'xss_clean|required');
 
-            $this->form_validation->set_rules('quote', '', 'xss_clean|required');
-            $this->form_validation->set_rules('quote_by', '', 'xss_clean|required');
-            $this->form_validation->set_rules('quote_dated', '', 'xss_clean|required');
+            $oFormValidation->set_message('required', lang('fv_required'));
 
-            $this->form_validation->set_message('required', lang('fv_required'));
-
-            if ($this->form_validation->run()) {
+            if ($oFormValidation->run()) {
 
                 $data                = array();
                 $data['quote']       = $this->input->post('quote');
