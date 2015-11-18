@@ -4,8 +4,8 @@
     </p>
     <?php
 
-        echo \Nails\Admin\Helper::loadSearch($search);
-        echo \Nails\Admin\Helper::loadPagination($pagination);
+        echo adminHelper('loadSearch', $search);
+        echo adminHelper('loadPagination', $pagination);
 
     ?>
     <div class="table-responsive">
@@ -37,9 +37,9 @@
                                     echo '<small>' . $oCampaign->description . '</small>';
                                 }
                             echo '</td>';
-                            echo \Nails\Admin\Helper::loadBoolCell($oCampaign->is_active);
-                            echo \Nails\Admin\Helper::loadDatetimeCell($oCampaign->last_run);
-                            echo \Nails\Admin\Helper::loadDatetimeCell($oCampaign->created);
+                            echo adminHelper('loadBoolCell', $oCampaign->is_active);
+                            echo adminHelper('loadDatetimeCell', $oCampaign->last_run);
+                            echo adminHelper('loadDatetimeCell', $oCampaign->created);
                             echo '<td class="actions">';
 
                                 if (userHasPermission('admin:emaildrip:campaign:edit')) {
@@ -81,7 +81,7 @@
     </div>
     <?php
 
-        echo \Nails\Admin\Helper::loadPagination($pagination);
+        echo adminHelper('loadPagination', $pagination);
 
     ?>
 </div>
