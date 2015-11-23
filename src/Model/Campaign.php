@@ -43,18 +43,11 @@ class Campaign extends Base
      * @param null $perPage The number of objects per page
      * @param array $data Data to pass to _getcount_common
      * @param bool|false $includeDeleted Whether to include deleted results
-     * @param string $_caller Internal flag of calling method
      * @return array
      */
-    public function get_all(
-        $page = null,
-        $perPage = null,
-        $data = array(),
-        $includeDeleted = false,
-        $_caller = 'GET_ALL'
-    ) {
+    public function get_all($page = null, $perPage = null, $data = array(), $includeDeleted = false) {
 
-        $aCampaigns = parent::get_all($page, $perPage, $data, $includeDeleted, $_caller);
+        $aCampaigns = parent::get_all($page, $perPage, $data, $includeDeleted);
 
         if (!empty($aCampaigns)) {
             if (!empty($data['include_emails'])) {
