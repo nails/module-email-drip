@@ -170,7 +170,7 @@ class Campaign extends BaseAdmin
 
                 } else {
 
-                    $this->data['error'] = 'Failed to create drip campaign. ' . $oCampaignModel->last_error();
+                    $this->data['error'] = 'Failed to create drip campaign. ' . $oCampaignModel->lastError();
                 }
 
             } else {
@@ -245,7 +245,7 @@ class Campaign extends BaseAdmin
 
                 } else {
 
-                    $this->data['error'] = 'Failed to update campaign. ' . $oCampaignModel->last_error();
+                    $this->data['error'] = 'Failed to update campaign. ' . $oCampaignModel->lastError();
                 }
 
             } else {
@@ -298,7 +298,7 @@ class Campaign extends BaseAdmin
 
         } else {
 
-            $this->session->set_flashdata('error', 'Failed to delete campaign. ' . $oCampaignModel->last_error());
+            $this->session->set_flashdata('error', 'Failed to delete campaign. ' . $oCampaignModel->lastError());
         }
 
         // --------------------------------------------------------------------------
