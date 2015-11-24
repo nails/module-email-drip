@@ -104,8 +104,8 @@ class Campaign extends BaseAdmin
         );
 
         //  Get the items for the page
-        $totalRows               = $oCampaignModel->count_all($data);
-        $this->data['campaigns'] = $oCampaignModel->get_all($page, $perPage, $data);
+        $totalRows               = $oCampaignModel->countAll($data);
+        $this->data['campaigns'] = $oCampaignModel->getAll($page, $perPage, $data);
 
         //  Set Search and Pagination objects for the view
         $this->data['search']     = Helper::searchObject(true, $sortColumns, $sortOn, $sortOrder, $perPage, $keywords);
@@ -114,7 +114,7 @@ class Campaign extends BaseAdmin
         //  Add a header button
         if (userHasPermission('admin:emaildrip:campaign:create')) {
 
-             Helper::addHeaderButton(
+            Helper::addHeaderButton(
                 'admin/emaildrip/campaign/create',
                 'Create Drip Campaign'
             );
@@ -208,7 +208,7 @@ class Campaign extends BaseAdmin
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
 
-        $this->data['campaign'] = $oCampaignModel->get_by_id($this->uri->segment(5));
+        $this->data['campaign'] = $oCampaignModel->getById($this->uri->segment(5));
 
         if (!$this->data['campaign']) {
 
@@ -283,7 +283,7 @@ class Campaign extends BaseAdmin
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
 
-        $oCampaign = $oCampaignModel->get_by_id($this->uri->segment(5));
+        $oCampaign = $oCampaignModel->getById($this->uri->segment(5));
 
         if (!$oCampaign) {
 

@@ -45,9 +45,9 @@ class Campaign extends Base
      * @param bool|false $includeDeleted Whether to include deleted results
      * @return array
      */
-    public function get_all($page = null, $perPage = null, $data = array(), $includeDeleted = false) {
-
-        $aCampaigns = parent::get_all($page, $perPage, $data, $includeDeleted);
+    public function getAll($page = null, $perPage = null, $data = array(), $includeDeleted = false)
+    {
+        $aCampaigns = parent::getAll($page, $perPage, $data, $includeDeleted);
 
         if (!empty($aCampaigns)) {
             if (!empty($data['include_emails'])) {
@@ -109,9 +109,9 @@ class Campaign extends Base
      * @param array $aData Data to pass to _getcount_common
      * @return mixed
      */
-    public function get_by_id($iId, $aData = array())
+    public function getById($iId, $aData = array())
     {
         $aData['include_emails'] = true;
-        return parent::get_by_id($iId, $aData);
+        return parent::getById($iId, $aData);
     }
 }
