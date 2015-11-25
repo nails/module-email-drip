@@ -47,7 +47,7 @@
                                     echo anchor(
                                         'admin/emaildrip/campaign/edit/' . $oCampaign->id,
                                         lang('action_edit'),
-                                        'class="awesome small"'
+                                        'class="btn btn-xs btn-primary"'
                                     );
                                 }
 
@@ -56,7 +56,7 @@
                                     echo anchor(
                                         'admin/emaildrip/campaign/delete/' . $oCampaign->id,
                                         lang('action_delete'),
-                                        'class="awesome red small confirm" data-body="You cannot undo this action"'
+                                        'class="btn btn-xs btn-danger confirm" data-body="You cannot undo this action"'
                                     );
                                 }
 
