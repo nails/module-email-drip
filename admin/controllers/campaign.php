@@ -181,7 +181,6 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $this->asset->library('KNOCKOUT');
         $this->asset->load('nails.admin.emaildrip.campaign.min.js', 'NAILS');
         $this->asset->inline(
             'ko.applyBindings(new dripCampaignEdit([]));',
@@ -256,7 +255,6 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $this->asset->library('KNOCKOUT');
         $this->asset->load('nails.admin.emaildrip.campaign.min.js', 'NAILS');
         $this->asset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($this->data['campaign']->emails) . '));',
