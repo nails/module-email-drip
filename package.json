@@ -1,0 +1,24 @@
+{
+  "name": "nailsapp-module-cms",
+  "description": "This is the \"CMS\" module for Nails.",
+  "author": "Nails Dev Team <hello@nailsapp.co.uk>",
+  "analyze": true,
+  "license": "MIT",
+  "repository": "https://github.com/nailsapp/module-cms",
+  "devDependencies": {
+    "gulp": "^3.9",
+    "gulp-autoprefixer": "^2.3",
+    "gulp-jshint": "^1.11",
+    "gulp-less": "^3.0",
+    "gulp-less-watcher": "^0.5.0",
+    "gulp-minify-css": "^1.2",
+    "gulp-notify": "^2.2",
+    "gulp-plumber": "^1.0",
+    "gulp-rename": "^1.2",
+    "gulp-sourcemaps": "^1.5",
+    "gulp-uglify": "^1.4",
+    "gulp-util": "^3.0",
+    "gulp-watch": "^4.3.5",
+    "jshint-stylish": "^2.0"
+  }
+}

@@ -1,4 +1,6 @@
 .DS_Store
 composer.lock
-vendor/*
+vendor
+node_modules
 .idea
+assets/bower_components

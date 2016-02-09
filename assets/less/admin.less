@@ -1,0 +1,98 @@
+/* --------------------------------------------------------------
+   Nails Email Drip Module Admin Styles
+-------------------------------------------------------------- */
+
+.group-email-drip {
+    &.campaign {
+        &.edit {
+            .configurations {
+                padding: 1em;
+                .time-group {
+                    border: 1px solid #CCCCCC;
+                    background: #FFFFFF;
+                    padding: 0.5em;
+                    margin: 0 0.5em;
+                    display: inline-block;
+                }
+                label {
+                    margin: 0 0.5em;
+                }
+            }
+            .email {
+                .controls {
+                    a {
+                        display: inline-block;
+                        width: 15px;
+                        text-align: center;
+                        font-size: 1.2em;
+                    }
+                }
+                .trigger {
+                    padding: 1em;
+                    button {
+                        .fa {
+                            margin-left: 0.3em;
+                        }
+                    }
+                    input,
+                    select {
+                        display: inline-block;
+                        margin: 0 1em;
+                    }
+                    input {
+                        width: 75px;
+                        text-align: center;
+                    }
+                    select {
+                        display: inline-block;
+                        height: 29px;
+                        padding: 6px 12px;
+                        line-height: 1.42857143;
+                        color: #555555;
+                        background-color: #FFFFFF;
+                        background-image: none;
+                        border: 1px solid #CCCCCC;
+                        border-radius: 4px;
+                        &[disabled] {
+                            background: #EFEFEF;
+                            color: #777777;
+                            cursor: not-allowed;
+                        }
+                    }
+                    .input-unit {
+                        select {
+                            width: 100px;
+                        }
+                    }
+                    .input-event {
+                        select {
+                            width: 200px;
+                        }
+                    }
+                }
+                .fields {
+                    transition: max-height 0.5s;
+                    max-height: 0;
+                    overflow: hidden;
+                    &.show {
+                        max-height: 400px;
+                    }
+                    > .field:first-child {
+                        border-top: 1px solid #CCCCCC;
+                    }
+                    textarea {
+                        min-height: 150px;
+                    }
+                    .shortcodes {
+                        background: @color-warning-text;
+                        color: @color-warning-text;
+                        border: 1px solid @color-warning-border;
+                        padding: 0.5em 1em;
+                        margin-top: 1em;
+                        font-size: 0.8em;
+                    }
+                }
+            }
+        }
+    }
+}

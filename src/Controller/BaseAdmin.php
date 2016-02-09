@@ -19,6 +19,6 @@ class BaseAdmin extends Base
     public function __construct()
     {
         parent::__construct();
-        $this->asset->load('nails.admin.module.emaildrip.css', 'NAILS');
+        $this->asset->load('admin.css', 'nailsapp/module-email-drip');
     }
 }

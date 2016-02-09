@@ -13,6 +13,7 @@
 namespace Nails\Admin\EmailDrip;
 
 use Nails\Factory;
+use Nails\Admin\Helper;
 use Nails\EmailDrip\Controller\BaseAdmin;
 
 class Segment extends BaseAdmin
@@ -31,5 +32,30 @@ class Segment extends BaseAdmin
 
             return $oNavGroup;
         }
+    }
+
+    // --------------------------------------------------------------------------
+
+    /**
+     * Returns an array of extra permissions for this controller
+     * @return array
+     */
+    public static function permissions()
+    {
+        $permissions = parent::permissions();
+
+        $permissions['manage'] = 'Can manage drip segments';
+        $permissions['create'] = 'Can create drip segments';
+        $permissions['edit']   = 'Can edit drip segments';
+        $permissions['delete'] = 'Can delete drip segments';
+
+        return $permissions;
+    }
+
+    // --------------------------------------------------------------------------
+
+    public function index()
+    {
+        Helper::loadView('index');
     }
 }
