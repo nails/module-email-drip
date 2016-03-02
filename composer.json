@@ -44,7 +44,8 @@
         "nails" :
         {
             "moduleName": "emaildrip",
-            "type": "module"
+            "type": "module",
+            "namespace": "Nails\\EmailDrip\\"
         }
     }
 }
