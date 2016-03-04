@@ -7,8 +7,8 @@
   "repository": "https://github.com/nailsapp/module-cms",
   "devDependencies": {
     "gulp": "^3.9",
-    "gulp-autoprefixer": "^2.3",
-    "gulp-jshint": "^1.11",
+    "gulp-autoprefixer": "^3.1",
+    "gulp-jshint": "^1.0",
     "gulp-less": "^3.0",
     "gulp-less-watcher": "^0.5.0",
     "gulp-minify-css": "^1.2",
