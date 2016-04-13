@@ -61,7 +61,6 @@ class Campaign extends BaseAdmin
     public function index()
     {
         if (!userHasPermission('admin:emaildrip:campaign:manage')) {
-
             unauthorised();
         }
 
@@ -80,7 +79,7 @@ class Campaign extends BaseAdmin
         //  Get pagination and search/sort variables
         $page      = $this->input->get('page')      ? $this->input->get('page')      : 0;
         $perPage   = $this->input->get('perPage')   ? $this->input->get('perPage')   : 50;
-        $sortOn    = $this->input->get('sortOn')    ? $this->input->get('sortOn')    : $sTablePrefix . '.created';
+        $sortOn    = $this->input->get('sortOn')    ? $this->input->get('sortOn')    : $sTablePrefix . '.label';
         $sortOrder = $this->input->get('sortOrder') ? $this->input->get('sortOrder') : 'desc';
         $keywords  = $this->input->get('keywords')  ? $this->input->get('keywords')  : '';
 
@@ -90,7 +89,7 @@ class Campaign extends BaseAdmin
         $sortColumns = array(
             $sTablePrefix . '.created'  => 'Created Date',
             $sTablePrefix . '.modified' => 'Modified Date',
-            $sTablePrefix . '.quote_by' => 'Quotee'
+            $sTablePrefix . '.label'    => 'label'
         );
 
         // --------------------------------------------------------------------------
@@ -113,7 +112,6 @@ class Campaign extends BaseAdmin
 
         //  Add a header button
         if (userHasPermission('admin:emaildrip:campaign:create')) {
-
             Helper::addHeaderButton(
                 'admin/emaildrip/campaign/create',
                 'Create Drip Campaign'
@@ -134,9 +132,12 @@ class Campaign extends BaseAdmin
     public function create()
     {
         if (!userHasPermission('admin:emaildrip:campaign:create')) {
-
             unauthorised();
         }
+
+        // --------------------------------------------------------------------------
+
+        $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
 
         // --------------------------------------------------------------------------
 
@@ -146,24 +147,9 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         if ($this->input->post()) {
+            if ($this->formValidation()) {
 
-            $oFormValidation = Factory::service('FormValidation');
-            $oFormValidation->set_rules('quote', '', 'xss_clean|required');
-            $oFormValidation->set_rules('quote_by', '', 'xss_clean|required');
-            $oFormValidation->set_rules('quote_dated', '', 'xss_clean|required');
-
-            $oFormValidation->set_message('required', lang('fv_required'));
-
-            if ($oFormValidation->run()) {
-
-                $data                = array();
-                $data['quote']       = $this->input->post('quote');
-                $data['quote_by']    = $this->input->post('quote_by');
-                $data['quote_dated'] = $this->input->post('quote_dated');
-
-                $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
-
-                if ($oCampaignModel->create($data)) {
+                if ($oCampaignModel->create($this->getPostObject())) {
 
                     $this->session->set_flashdata('success', 'Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
@@ -181,12 +167,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $this->asset->load('admin.campaign.edit.min.js', 'nailsapp/module-email-drip');
-        $this->asset->inline(
-            'ko.applyBindings(new dripCampaignEdit([]));',
-            'JS'
-        );
-
+        $this->loadViewData();
         Helper::loadView('edit');
     }
 
@@ -199,7 +180,6 @@ class Campaign extends BaseAdmin
     public function edit()
     {
         if (!userHasPermission('admin:emaildrip:campaign:edit')) {
-
             unauthorised();
         }
 
@@ -207,10 +187,16 @@ class Campaign extends BaseAdmin
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
 
-        $this->data['campaign'] = $oCampaignModel->getById($this->uri->segment(5));
+        // --------------------------------------------------------------------------
+
+        $this->data['campaign'] = $oCampaignModel->getById(
+            $this->uri->segment(5),
+            array(
+                'includeEmails' => true
+            )
+        );
 
         if (!$this->data['campaign']) {
-
             show_404();
         }
 
@@ -222,22 +208,9 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         if ($this->input->post()) {
+            if ($this->formValidation()) {
 
-            $oFormValidation = Factory::service('FormValidation');
-            $oFormValidation->set_rules('quote', '', 'xss_clean|required');
-            $oFormValidation->set_rules('quote_by', '', 'xss_clean|required');
-            $oFormValidation->set_rules('quote_dated', '', 'xss_clean|required');
-
-            $oFormValidation->set_message('required', lang('fv_required'));
-
-            if ($oFormValidation->run()) {
-
-                $data                = array();
-                $data['quote']       = $this->input->post('quote');
-                $data['quote_by']    = $this->input->post('quote_by');
-                $data['quote_dated'] = $this->input->post('quote_dated');
-
-                if ($oCampaignModel->update($this->data['campaign']->id, $data)) {
+                if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
 
                     $this->session->set_flashdata('success', 'Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
@@ -255,13 +228,56 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $this->asset->load('admin.campaign.edit.min.js', 'nailsapp/module-email-drip');
-        $this->asset->inline(
-            'ko.applyBindings(new dripCampaignEdit(' . json_encode($this->data['campaign']->emails) . '));',
+        $this->loadViewData($this->data['campaign']);
+        Helper::loadView('edit');
+    }
+
+    // --------------------------------------------------------------------------
+
+    protected function loadViewData($oItem = null)
+    {
+        //  Load services
+        $oAsset        = Factory::service('Asset');
+        $oSegmentModel = Factory::model('Segment', 'nailsapp/module-email-drip');
+
+        //  Load Segments
+        $this->data['segments'] = $oSegmentModel->getAllFlat();
+
+        //  Load assets
+        $aEmails = $oItem ? $oItem->email->data : array();
+
+        $oAsset->load('admin.campaign.edit.min.js', 'nailsapp/module-email-drip');
+        $oAsset->inline(
+            'ko.applyBindings(new dripCampaignEdit(' . json_encode($aEmails) . '));',
             'JS'
         );
+    }
 
-        Helper::loadView('edit');
+    // --------------------------------------------------------------------------
+
+    /**
+     * Runs form validation
+     * @return boolean
+     */
+    protected function formValidation()
+    {
+        $oFormValidation = Factory::service('FormValidation');
+
+        $oFormValidation->set_rules('quote', '', '');
+
+        $oFormValidation->set_message('required', lang('fv_required'));
+
+        return $oFormValidation->run();
+    }
+
+    // --------------------------------------------------------------------------
+
+    public function getPostObject()
+    {
+        dumpanddie($_POST);
+        return array(
+            'foo'       => $this->input->post('bar')
+        );
     }
 
     // --------------------------------------------------------------------------
@@ -273,18 +289,15 @@ class Campaign extends BaseAdmin
     public function delete()
     {
         if (!userHasPermission('admin:emaildrip:campaign:delete')) {
-
             unauthorised();
         }
 
         // --------------------------------------------------------------------------
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
-
-        $oCampaign = $oCampaignModel->getById($this->uri->segment(5));
+        $oCampaign      = $oCampaignModel->getById($this->uri->segment(5));
 
         if (!$oCampaign) {
-
             show_404();
         }
 
@@ -292,14 +305,19 @@ class Campaign extends BaseAdmin
 
         if ($oCampaignModel->delete($oCampaign->id)) {
 
-            $this->session->set_flashdata('success', 'Successfully deleted campaign.');
+            $sStatus  = 'success';
+            $sMessage = 'Successfully deleted campaign.';
 
         } else {
 
-            $this->session->set_flashdata('error', 'Failed to delete campaign. ' . $oCampaignModel->lastError());
+            $sStatus  = 'error';
+            $sMessage = 'Failed to delete campaign. ' . $oCampaignModel->lastError();
         }
 
         // --------------------------------------------------------------------------
+
+        $oSession = Factory::service('Session', 'nailsapp/module-auth');
+        $oSession->set_flashdata($sStatus, $sMessage);
 
         redirect('admin/emaildrip/campaign/index');
     }

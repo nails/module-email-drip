@@ -2,17 +2,12 @@
     <p>
         Browse all drip campaigns.
     </p>
-    <?php
-
-        echo adminHelper('loadSearch', $search);
-        echo adminHelper('loadPagination', $pagination);
-
-    ?>
+    <?=adminHelper('loadSearch', $search)?>
+    <?=adminHelper('loadPagination', $pagination)?>
     <div class="table-responsive">
         <table>
             <thead>
                 <tr>
-                    <th class="id">ID</th>
                     <th class="label">Label</th>
                     <th class="boolean">Active</th>
                     <th class="datetime">Last Run</th>
@@ -27,23 +22,25 @@
 
                     foreach ($campaigns as $oCampaign) {
 
-                        echo '<tr>';
-                            echo '<td class="id">';
-                                echo number_format($oCampaign->id);
-                            echo '</td>';
-                            echo '<td class="label">';
+                        ?>
+                        <tr>
+                            <td class="label">
+                                <?php
+
                                 echo $oCampaign->label;
                                 if (!empty($oCampaign->description)) {
                                     echo '<small>' . $oCampaign->description . '</small>';
                                 }
-                            echo '</td>';
-                            echo adminHelper('loadBoolCell', $oCampaign->is_active);
-                            echo adminHelper('loadDatetimeCell', $oCampaign->last_run);
-                            echo adminHelper('loadDatetimeCell', $oCampaign->created);
-                            echo '<td class="actions">';
+
+                                ?>
+                            </td>
+                            <?=adminHelper('loadBoolCell', $oCampaign->is_active)?>
+                            <?=adminHelper('loadDatetimeCell', $oCampaign->last_run)?>
+                            <?=adminHelper('loadDatetimeCell', $oCampaign->created)?>
+                            <td class="actions">
+                                <?php
 
                                 if (userHasPermission('admin:emaildrip:campaign:edit')) {
-
                                     echo anchor(
                                         'admin/emaildrip/campaign/edit/' . $oCampaign->id,
                                         lang('action_edit'),
@@ -52,7 +49,6 @@
                                 }
 
                                 if (userHasPermission('admin:emaildrip:campaign:delete')) {
-
                                     echo anchor(
                                         'admin/emaildrip/campaign/delete/' . $oCampaign->id,
                                         lang('action_delete'),
@@ -60,15 +56,17 @@
                                     );
                                 }
 
-                            echo '</td>';
-                        echo '<tr>';
+                                ?>
+                            </td>
+                        <tr>
+                        <?php
                     }
 
                 } else {
 
                     ?>
                     <tr>
-                        <td colspan="6" class="no-data">
+                        <td colspan="5" class="no-data">
                             No Drip Campaigns Configured
                         </td>
                     </tr>
@@ -79,9 +77,5 @@
             </tbody>
         </table>
     </div>
-    <?php
-
-        echo adminHelper('loadPagination', $pagination);
-
-    ?>
+    <?=adminHelper('loadPagination', $pagination)?>
 </div>

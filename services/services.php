@@ -8,28 +8,26 @@ return array(
             } else {
                 return new \Nails\EmailDrip\Model\Campaign();
             }
-        }
-    ),
-    'factories' => array(
-        'Email' => function () {
-            if (class_exists('\App\EmailDrip\Model\Email')) {
-                return new \App\EmailDrip\Model\Email();
+        },
+        'CampaignEmail' => function () {
+            if (class_exists('\App\EmailDrip\Model\CampaignEmail')) {
+                return new \App\EmailDrip\Model\CampaignEmail();
             } else {
-                return new \Nails\EmailDrip\Model\Email();
+                return new \Nails\EmailDrip\Model\CampaignEmail();
             }
         },
-        'Rule' => function () {
-            if (class_exists('\App\EmailDrip\Model\Rule')) {
-                return new \App\EmailDrip\Model\Rule();
+        'CampaignEmailLog' => function () {
+            if (class_exists('\App\EmailDrip\Model\CampaignEmailLog')) {
+                return new \App\EmailDrip\Model\CampaignEmailLog();
             } else {
-                return new \Nails\EmailDrip\Model\Rule();
+                return new \Nails\EmailDrip\Model\CampaignEmailLog();
             }
         },
-        'ShortCode' => function () {
-            if (class_exists('\App\EmailDrip\Model\ShortCode')) {
-                return new \App\EmailDrip\Model\ShortCode();
+        'Segment' => function () {
+            if (class_exists('\App\EmailDrip\Model\Segment')) {
+                return new \App\EmailDrip\Model\Segment();
             } else {
-                return new \Nails\EmailDrip\Model\ShortCode();
+                return new \Nails\EmailDrip\Model\Segment();
             }
         }
     )
