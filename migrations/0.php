@@ -25,7 +25,7 @@ class Migration0 extends Base
     public function execute()
     {
         $this->query("
-            CREATE TABLE `{{NAILS_DB_PREFIX}}email_drip_campaign` (
+            CREATE TABLE `nails_email_drip_campaign` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `segment_id` int(11) unsigned NOT NULL,
                 `label` varchar(150) NOT NULL DEFAULT '',
@@ -40,14 +40,14 @@ class Migration0 extends Base
                 KEY `created_by` (`created_by`),
                 KEY `modified_by` (`modified_by`),
                 KEY `segment_id` (`segment_id`),
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_ibfk_3` FOREIGN KEY (`segment_id`) REFERENCES `{{NAILS_DB_PREFIX}}email_drip_campaign_segment` (`id`)
+                CONSTRAINT `nails_email_drip_campaign_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL,
+                CONSTRAINT `nails_email_drip_campaign_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL,
+                CONSTRAINT `nails_email_drip_campaign_ibfk_3` FOREIGN KEY (`segment_id`) REFERENCES `nails_email_drip_campaign_segment` (`id`)
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
         $this->query("
-            CREATE TABLE `{{NAILS_DB_PREFIX}}email_drip_campaign_email` (`
-                id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+            CREATE TABLE `nails_email_drip_campaign_email` (
+                `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `campaign_id` int(11) unsigned NOT NULL,
                 `order` int(11) unsigned NOT NULL DEFAULT '0',
                 `trigger_event` varchar(50) NOT NULL,
@@ -58,23 +58,23 @@ class Migration0 extends Base
                 `body_text` text NOT NULL,
                 PRIMARY KEY (`id`),
                 KEY `campaign_id` (`campaign_id`),
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_email_ibfk_1` FOREIGN KEY (`campaign_id`) REFERENCES `{{NAILS_DB_PREFIX}}email_drip_campaign` (`id`) ON DELETE CASCADE
+                CONSTRAINT `nails_email_drip_campaign_email_ibfk_1` FOREIGN KEY (`campaign_id`) REFERENCES `nails_email_drip_campaign` (`id`) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
         $this->query("
-            CREATE TABLE `{{NAILS_DB_PREFIX}}email_drip_campaign_email_log` (
+            CREATE TABLE `nails_email_drip_campaign_email_log` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `campaign_email_id` int(11) unsigned NOT NULL,
                 `user_id` int(11) unsigned NOT NULL,
                 `created` datetime NOT NULL,
                 PRIMARY KEY (`id`),
                 KEY `campaign_email_id` (`campaign_email_id`), KEY `user_id` (`user_id`),
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_email_log_ibfk_1` FOREIGN KEY (`campaign_email_id`) REFERENCES `{{NAILS_DB_PREFIX}}email_drip_campaign_email` (`id`) ON DELETE CASCADE,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_email_log_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE CASCADE
+                CONSTRAINT `nails_email_drip_campaign_email_log_ibfk_1` FOREIGN KEY (`campaign_email_id`) REFERENCES `nails_email_drip_campaign_email` (`id`) ON DELETE CASCADE,
+                CONSTRAINT `nails_email_drip_campaign_email_log_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `nails_user` (`id`) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
         $this->query("
-            CREATE TABLE `{{NAILS_DB_PREFIX}}email_drip_campaign_segment` (
+            CREATE TABLE `nails_email_drip_campaign_segment` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `label` varchar(150) NOT NULL DEFAULT '',
                 `created` datetime NOT NULL,
@@ -84,12 +84,12 @@ class Migration0 extends Base
                 PRIMARY KEY (`id`),
                 KEY `created_by` (`created_by`),
                 KEY `modified_by` (`modified_by`),
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL
+                CONSTRAINT `nails_email_drip_campaign_segment_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL,
+                CONSTRAINT `nails_email_drip_campaign_segment_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
         $this->query("
-            CREATE TABLE `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_rule` (
+            CREATE TABLE `nails_email_drip_campaign_segment_rule` (
                 `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
                 `segment_id` int(11) unsigned NOT NULL,
                 `created` datetime NOT NULL,
@@ -99,9 +99,9 @@ class Migration0 extends Base
                 KEY `created_by` (`created_by`),
                 KEY `modified_by` (`modified_by`),
                 KEY `segment_id` (`segment_id`),
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_rule_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_rule_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `{{NAILS_DB_PREFIX}}user` (`id`) ON DELETE SET NULL,
-                CONSTRAINT `{{NAILS_DB_PREFIX}}email_drip_campaign_segment_rule_ibfk_3` FOREIGN KEY (`segment_id`) REFERENCES `{{NAILS_DB_PREFIX}}email_drip_campaign_segment` (`id`) ON DELETE CASCADE
+                CONSTRAINT `nails_email_drip_campaign_segment_rule_ibfk_1` FOREIGN KEY (`created_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL,
+                CONSTRAINT `nails_email_drip_campaign_segment_rule_ibfk_2` FOREIGN KEY (`modified_by`) REFERENCES `nails_user` (`id`) ON DELETE SET NULL,
+                CONSTRAINT `nails_email_drip_campaign_segment_rule_ibfk_3` FOREIGN KEY (`segment_id`) REFERENCES `nails_email_drip_campaign_segment` (`id`) ON DELETE CASCADE
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         ");
     }
