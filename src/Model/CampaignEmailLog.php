@@ -23,6 +23,6 @@ class CampaignEmailLog extends Base
     {
         parent::__construct();
         $this->table       = NAILS_DB_PREFIX . 'email_drip_campaign_email_log';
-        $this->tablePrefix = 'edcel';
+        $this->tableAlias = 'edcel';
     }
 }

@@ -67,7 +67,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
-        $sTablePrefix   =  $oCampaignModel->getTableAlias();
+        $sTableAlias   =  $oCampaignModel->getTableAlias();
 
         // --------------------------------------------------------------------------
 
@@ -79,7 +79,7 @@ class Campaign extends BaseAdmin
         //  Get pagination and search/sort variables
         $page      = $this->input->get('page')      ? $this->input->get('page')      : 0;
         $perPage   = $this->input->get('perPage')   ? $this->input->get('perPage')   : 50;
-        $sortOn    = $this->input->get('sortOn')    ? $this->input->get('sortOn')    : $sTablePrefix . '.label';
+        $sortOn    = $this->input->get('sortOn')    ? $this->input->get('sortOn')    : $sTableAlias . '.label';
         $sortOrder = $this->input->get('sortOrder') ? $this->input->get('sortOrder') : 'desc';
         $keywords  = $this->input->get('keywords')  ? $this->input->get('keywords')  : '';
 
@@ -87,9 +87,9 @@ class Campaign extends BaseAdmin
 
         //  Define the sortable columns
         $sortColumns = array(
-            $sTablePrefix . '.created'  => 'Created Date',
-            $sTablePrefix . '.modified' => 'Modified Date',
-            $sTablePrefix . '.label'    => 'label'
+            $sTableAlias . '.created'  => 'Created Date',
+            $sTableAlias . '.modified' => 'Modified Date',
+            $sTableAlias . '.label'    => 'label'
         );
 
         // --------------------------------------------------------------------------

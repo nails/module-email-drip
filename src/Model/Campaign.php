@@ -23,7 +23,7 @@ class Campaign extends Base
     {
         parent::__construct();
         $this->table       = NAILS_DB_PREFIX . 'email_drip_campaign';
-        $this->tablePrefix = 'edc';
+        $this->tableAlias = 'edc';
     }
 
     // --------------------------------------------------------------------------
