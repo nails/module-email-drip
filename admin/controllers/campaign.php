@@ -67,7 +67,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
-        $sTablePrefix   =  $oCampaignModel->getTablePrefix();
+        $sTablePrefix   =  $oCampaignModel->getTableAlias();
 
         // --------------------------------------------------------------------------
 
