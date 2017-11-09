@@ -38,6 +38,13 @@ class Campaign extends Base
      */
     public function getAll($iPage = null, $iPerPage = null, $aData = array(), $bIncludeDeleted = false)
     {
+        //  If the first value is an array then treat as if called with getAll(null, null, $aData);
+        //  @todo (Pablo - 2017-11-09) - Convert these to expandable fields
+        if (is_array($iPage)) {
+            $aData = $iPage;
+            $iPage = null;
+        }
+
         $aItems = parent::getAll($iPage, $iPerPage, $aData, $bIncludeDeleted);
 
         if (!empty($aItems)) {
