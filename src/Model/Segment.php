@@ -36,8 +36,7 @@ class Segment
         //  Any segments from the app?
         $this->autoLoadSegments('App\\');
 
-        Factory::helper('array');
-        array_sort_multi($this->aSegments, 'label');
+        arraySortMulti($this->aSegments, 'label');
     }
 
     // --------------------------------------------------------------------------
