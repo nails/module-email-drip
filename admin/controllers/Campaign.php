@@ -151,7 +151,8 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->create($this->getPostObject())) {
 
-                    $this->session->set_flashdata('success', 'Successfully created drip campaign.');
+                    $oSession = Factory::service('Session', 'nailsapp/module-auth');
+                    $oSession->setFlashData('success', 'Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
@@ -212,7 +213,8 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
 
-                    $this->session->set_flashdata('success', 'Successfully updated drip campaign.');
+                    $oSession = Factory::service('Session', 'nailsapp/module-auth');
+                    $oSession->setFlashData('success', 'Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
@@ -317,7 +319,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oSession = Factory::service('Session', 'nailsapp/module-auth');
-        $oSession->set_flashdata($sStatus, $sMessage);
+        $oSession->setFlashData($sStatus, $sMessage);
 
         redirect('admin/emaildrip/campaign/index');
     }
