@@ -31,10 +31,10 @@ class CampaignEmail extends Base
 
     protected function formatObject(
         &$oObj,
-        $aData = array(),
-        $aIntegers = array(),
-        $aBools = array(),
-        $aFloats = array()
+        array $aData = [],
+        array $aIntegers = [],
+        array $aBools = [],
+        array $aFloats = []
     ) {
         parent::formatObject($oObj, $aData, $aIntegers, $aBools, $aFloats);
 

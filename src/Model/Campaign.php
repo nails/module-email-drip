@@ -36,7 +36,7 @@ class Campaign extends Base
      * @param bool|false $bIncludeDeleted Whether to include deleted results
      * @return array
      */
-    public function getAll($iPage = null, $iPerPage = null, $aData = array(), $bIncludeDeleted = false)
+    public function getAll($iPage = null, $iPerPage = null, array $aData = array(), $bIncludeDeleted = false)
     {
         //  If the first value is an array then treat as if called with getAll(null, null, $aData);
         //  @todo (Pablo - 2017-11-09) - Convert these to expandable fields
