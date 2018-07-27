@@ -23,7 +23,6 @@ class CampaignEmail extends Base
     {
         parent::__construct();
         $this->table             = NAILS_DB_PREFIX . 'email_drip_campaign_email';
-        $this->tableAlias       = 'edce';
         $this->defaultSortColumn = 'order';
     }
 

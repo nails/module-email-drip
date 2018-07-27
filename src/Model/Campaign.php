@@ -22,43 +22,14 @@ class Campaign extends Base
     public function __construct()
     {
         parent::__construct();
-        $this->table       = NAILS_DB_PREFIX . 'email_drip_campaign';
-        $this->tableAlias = 'edc';
-    }
-
-    // --------------------------------------------------------------------------
-
-    /**
-     * Returns all content objects
-     * @param null       $page            The page to return
-     * @param null       $iPerPage        The number of objects per page
-     * @param array      $aData           Data to pass to _getcount_common
-     * @param bool|false $bIncludeDeleted Whether to include deleted results
-     * @return array
-     */
-    public function getAll($iPage = null, $iPerPage = null, array $aData = array(), $bIncludeDeleted = false)
-    {
-        //  If the first value is an array then treat as if called with getAll(null, null, $aData);
-        //  @todo (Pablo - 2017-11-09) - Convert these to expandable fields
-        if (is_array($iPage)) {
-            $aData = $iPage;
-            $iPage = null;
-        }
-
-        $aItems = parent::getAll($iPage, $iPerPage, $aData, $bIncludeDeleted);
-
-        if (!empty($aItems)) {
-            if (!empty($aData['includeAll']) || !empty($aData['includeEmails'])) {
-                $this->getManyAssociatedItems(
-                    $aItems,
-                    'email',
-                    'campaign_id',
-                    'CampaignEmail',
-                    'nailsapp/module-email-drip'
-                );
-            }
-        }
-
-        return $aItems;
+        $this->table = NAILS_DB_PREFIX . 'email_drip_campaign';
+        $this->addExpandableField([
+            'trigger'   => 'emails',
+            'type'      => self::EXPANDABLE_TYPE_MANY,
+            'property'  => 'emails',
+            'model'     => 'CampaignEmail',
+            'provider'  => 'nailsapp/module-email-drip',
+            'id_column' => 'campaign_id',
+        ]);
     }
 }
