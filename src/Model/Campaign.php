@@ -28,7 +28,7 @@ class Campaign extends Base
             'type'      => self::EXPANDABLE_TYPE_MANY,
             'property'  => 'emails',
             'model'     => 'CampaignEmail',
-            'provider'  => 'nailsapp/module-email-drip',
+            'provider'  => 'nails/module-email-drip',
             'id_column' => 'campaign_id',
         ]);
     }

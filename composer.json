@@ -1,5 +1,5 @@
 {
-    "name": "nailsapp/module-email-drip",
+    "name": "nails/module-email-drip",
     "keywords": ["Nails", "Shed Collective", "CodeIgniter", "Email Drip Campaign Module", "Email", "Drip Campaign"],
     "homepage": "http://nailsapp.co.uk/modules/email-drip",
     "description": "This is the \"Email Drip Campaign\" module for Nails.",
@@ -27,9 +27,9 @@
     "prefer-stable": true,
     "require":
     {
-        "nailsapp/common": "dev-develop",
-        "nailsapp/module-email": "dev-develop",
-        "nailsapp/module-cron": "dev-develop"
+        "nails/common": "dev-develop",
+        "nails/module-email": "dev-develop",
+        "nails/module-cron": "dev-develop"
     },
     "require-dev":
     {

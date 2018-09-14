@@ -26,7 +26,7 @@ class Campaign extends BaseAdmin
     {
         if (userHasPermission('admin:emaildrip:campaign:manage')) {
 
-            $oNavGroup = Factory::factory('Nav', 'nailsapp/module-admin');
+            $oNavGroup = Factory::factory('Nav', 'nails/module-admin');
             $oNavGroup->setLabel('Email');
             $oNavGroup->addAction('Manage Drip Campaigns');
 
@@ -66,7 +66,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
         $sTableAlias   =  $oCampaignModel->getTableAlias();
 
         // --------------------------------------------------------------------------
@@ -137,7 +137,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
 
         // --------------------------------------------------------------------------
 
@@ -151,7 +151,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->create($this->getPostObject())) {
 
-                    $oSession = Factory::service('Session', 'nailsapp/module-auth');
+                    $oSession = Factory::service('Session', 'nails/module-auth');
                     $oSession->setFlashData('success', 'Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
@@ -186,7 +186,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
 
         // --------------------------------------------------------------------------
 
@@ -208,7 +208,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
 
-                    $oSession = Factory::service('Session', 'nailsapp/module-auth');
+                    $oSession = Factory::service('Session', 'nails/module-auth');
                     $oSession->setFlashData('success', 'Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
@@ -235,7 +235,7 @@ class Campaign extends BaseAdmin
     {
         //  Load services
         $oAsset        = Factory::service('Asset');
-        $oSegmentModel = Factory::model('Segment', 'nailsapp/module-email-drip');
+        $oSegmentModel = Factory::model('Segment', 'nails/module-email-drip');
 
         //  Load Segments
         $this->data['segments'] = $oSegmentModel->getAllFlat();
@@ -243,7 +243,7 @@ class Campaign extends BaseAdmin
         //  Load assets
         $aEmails = $oItem ? $oItem->email->data : array();
 
-        $oAsset->load('admin.campaign.edit.min.js', 'nailsapp/module-email-drip');
+        $oAsset->load('admin.campaign.edit.min.js', 'nails/module-email-drip');
         $oAsset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($aEmails) . '));',
             'JS'
@@ -291,7 +291,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nailsapp/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
         $oCampaign      = $oCampaignModel->getById($this->uri->segment(5));
 
         if (!$oCampaign) {
@@ -313,7 +313,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oSession = Factory::service('Session', 'nailsapp/module-auth');
+        $oSession = Factory::service('Session', 'nails/module-auth');
         $oSession->setFlashData($sStatus, $sMessage);
 
         redirect('admin/emaildrip/campaign/index');

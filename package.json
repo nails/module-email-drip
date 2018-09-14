@@ -1,10 +1,10 @@
 {
-  "name": "nailsapp-module-cms",
+  "name": "nails-module-cms",
   "description": "This is the \"CMS\" module for Nails.",
   "author": "Nails Dev Team <hello@nailsapp.co.uk>",
   "analyze": true,
   "license": "MIT",
-  "repository": "https://github.com/nailsapp/module-cms",
+  "repository": "https://github.com/nails/module-cms",
   "devDependencies": {
     "gulp": "^3.9",
     "gulp-autoprefixer": "^3.1",

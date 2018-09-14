@@ -1,4 +1,4 @@
-# Docs for `nailsapp/module-email-drip`
+# Docs for `nails/module-email-drip`
 > Documentation is a WIP.
 
 - [Campaigns](docs/campaigns.md)
