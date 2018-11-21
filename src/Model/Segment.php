@@ -12,6 +12,7 @@
 
 namespace Nails\EmailDrip\Model;
 
+use Nails\Components;
 use Nails\Factory;
 
 class Segment
@@ -26,8 +27,7 @@ class Segment
         $this->aSegments = array();
 
         //  Look for defined segments
-        $aComponents = _NAILS_GET_COMPONENTS();
-        foreach ($aComponents as $oComponent) {
+        foreach (Components::list() as $oComponent) {
             if (!empty($oComponent->namespace)) {
                 $this->autoLoadSegments($oComponent->namespace);
             }

@@ -194,7 +194,7 @@ class Campaign extends BaseAdmin
         $this->data['campaign'] = $oCampaignModel->getById($oUri->segment(5), ['expand' => ['emails']]);
 
         if (!$this->data['campaign']) {
-            show_404();
+            show404();
         }
 
         // --------------------------------------------------------------------------
@@ -297,7 +297,7 @@ class Campaign extends BaseAdmin
         $oCampaign      = $oCampaignModel->getById($oUri->segment(5));
 
         if (!$oCampaign) {
-            show_404();
+            show404();
         }
 
         // --------------------------------------------------------------------------
