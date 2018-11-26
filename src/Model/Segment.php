@@ -27,7 +27,7 @@ class Segment
         $this->aSegments = array();
 
         //  Look for defined segments
-        foreach (Components::list() as $oComponent) {
+        foreach (Components::available() as $oComponent) {
             if (!empty($oComponent->namespace)) {
                 $this->autoLoadSegments($oComponent->namespace);
             }
