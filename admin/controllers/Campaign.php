@@ -66,8 +66,9 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
+        $oInput         = Factory::service('Input');
         $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
-        $sTableAlias   =  $oCampaignModel->getTableAlias();
+        $sTableAlias    = $oCampaignModel->getTableAlias();
 
         // --------------------------------------------------------------------------
 
@@ -77,11 +78,11 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         //  Get pagination and search/sort variables
-        $page      = $this->input->get('page')      ? $this->input->get('page')      : 0;
-        $perPage   = $this->input->get('perPage')   ? $this->input->get('perPage')   : 50;
-        $sortOn    = $this->input->get('sortOn')    ? $this->input->get('sortOn')    : $sTableAlias . '.label';
-        $sortOrder = $this->input->get('sortOrder') ? $this->input->get('sortOrder') : 'desc';
-        $keywords  = $this->input->get('keywords')  ? $this->input->get('keywords')  : '';
+        $page      = $oInput->get('page')      ? $oInput->get('page')      : 0;
+        $perPage   = $oInput->get('perPage')   ? $oInput->get('perPage')   : 50;
+        $sortOn    = $oInput->get('sortOn')    ? $oInput->get('sortOn')    : $sTableAlias . '.label';
+        $sortOrder = $oInput->get('sortOrder') ? $oInput->get('sortOrder') : 'desc';
+        $keywords  = $oInput->get('keywords')  ? $oInput->get('keywords')  : '';
 
         // --------------------------------------------------------------------------
 
@@ -146,7 +147,8 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        if ($this->input->post()) {
+        $oInput = Factory::service('Input');
+        if ($oInput->post()) {
             if ($this->formValidation()) {
 
                 if ($oCampaignModel->create($this->getPostObject())) {
@@ -204,7 +206,8 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        if ($this->input->post()) {
+        $oInput = Factory::service('Input');
+        if ($oInput->post()) {
             if ($this->formValidation()) {
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
@@ -273,9 +276,7 @@ class Campaign extends BaseAdmin
     public function getPostObject()
     {
         dumpanddie($_POST);
-        return array(
-            'foo'       => $this->input->post('bar')
-        );
+        return [];
     }
 
     // --------------------------------------------------------------------------
