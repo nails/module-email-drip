@@ -253,7 +253,8 @@ class Campaign extends BaseAdmin
         //  Load assets
         $aEmails = $oItem ? $oItem->email->data : [];
 
-        $oAsset->load('admin.campaign.edit.min.js', 'nails/module-email-drip');
+         //  @todo (Pablo - 2019-09-13) - Update/Remove/Use minified once JS is refactored to be a module
+        $oAsset->load('admin.campaign.edit.js', 'nails/module-email-drip');
         $oAsset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($aEmails) . '));',
             'JS'
