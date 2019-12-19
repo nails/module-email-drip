@@ -244,16 +244,16 @@ class Campaign extends BaseAdmin
     protected function loadViewData($oItem = null)
     {
         //  Load services
-        $oAsset        = Factory::service('Asset');
-        $oSegmentModel = Factory::model('Segment', 'nails/module-email-drip');
+        $oAsset          = Factory::service('Asset');
+        $oSegmentService = Factory::service('Segment', 'nails/module-email-drip');
 
         //  Load Segments
-        $this->data['segments'] = $oSegmentModel->getAllFlat();
+        $this->data['segments'] = $oSegmentService->getAllFlat();
 
         //  Load assets
         $aEmails = $oItem ? $oItem->email->data : [];
 
-         //  @todo (Pablo - 2019-09-13) - Update/Remove/Use minified once JS is refactored to be a module
+        //  @todo (Pablo - 2019-09-13) - Update/Remove/Use minified once JS is refactored to be a module
         $oAsset->load('admin.campaign.edit.js', 'nails/module-email-drip');
         $oAsset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($aEmails) . '));',

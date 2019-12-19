@@ -1,40 +1,48 @@
 <?php
 
 /**
- * Email Drip Segment model
+ * Email Drip Segment service
  *
  * @package     Nails
  * @subpackage  module-email-drip
- * @category    Model
+ * @category    Service
  * @author      Nails Dev Team
  * @link
  */
 
-namespace Nails\EmailDrip\Model;
+namespace Nails\EmailDrip\Service;
 
+use Nails\Common\Factory\Component;
 use Nails\Components;
 use Nails\Factory;
 
+/**
+ * Class Segment
+ *
+ * @package Nails\EmailDrip\Service
+ */
 class Segment
 {
-    protected $aSegments;
+    /**
+     * The discovered segments
+     *
+     * @var \stdClass[]
+     */
+    protected $aSegments = [];
 
     // --------------------------------------------------------------------------
 
-
+    /**
+     * Segment constructor.
+     */
     public function __construct()
     {
-        $this->aSegments = array();
-
-        //  Look for defined segments
+        /** @var Component $oComponent */
         foreach (Components::available() as $oComponent) {
             if (!empty($oComponent->namespace)) {
                 $this->autoLoadSegments($oComponent->namespace);
             }
         }
-
-        //  Any segments from the app?
-        $this->autoLoadSegments('App\\');
 
         arraySortMulti($this->aSegments, 'label');
     }
@@ -43,10 +51,12 @@ class Segment
 
     /**
      * Looks for an NAMESPACE/EmailDrip/Segments class in each component and analyses it for public methods
-     * @param  string $sNamespace The namespace to check
-     * @return void
+     *
+     * @param string $sNamespace The namespace to check
+     *
+     * @throws \ReflectionException
      */
-    protected function autoLoadSegments($sNamespace)
+    protected function autoLoadSegments(string $sNamespace): void
     {
         $sClassName = '\\' . $sNamespace . 'EmailDripSegments';
 
@@ -61,7 +71,7 @@ class Segment
 
                 $sDoc   = $oMethod->getDocComment();
                 $aDoc   = explode("\n", $sDoc);
-                $aLabel = array();
+                $aLabel = [];
 
                 foreach ($aDoc as $sLine) {
 
@@ -90,12 +100,12 @@ class Segment
                     $sLabel = ucfirst(str_replace('_', ' ', $sLabel));
                 }
 
-                $this->aSegments[] = (object) array(
+                $this->aSegments[] = (object) [
                     'slug'   => md5($sClassName . '::' . $oMethod->getName()),
                     'label'  => $sLabel,
                     'class'  => $sClassName,
-                    'method' => $oMethod->getName()
-                );
+                    'method' => $oMethod->getName(),
+                ];
             }
         }
     }
@@ -104,9 +114,10 @@ class Segment
 
     /**
      * Returns all discovered segments
-     * @return array
+     *
+     * @return \stdClass[]
      */
-    public function getAll()
+    public function getAll(): array
     {
         return $this->aSegments;
     }
@@ -115,12 +126,13 @@ class Segment
 
     /**
      * Retruns a flat array of discovered segments
-     * @return array
+     *
+     * @return \stdClass[]
      */
-    public function getAllFlat()
+    public function getAllFlat(): array
     {
         $aItems = $this->getAll();
-        $aOut   = array();
+        $aOut   = [];
 
         foreach ($aItems as $oItem) {
             $aOut[$oItem->slug] = $oItem->label;
