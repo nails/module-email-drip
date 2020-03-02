@@ -12,7 +12,6 @@
 
 namespace Nails\Admin\EmailDrip;
 
-use Nails\Auth;
 use Nails\Admin\Helper;
 use Nails\EmailDrip\Controller\BaseAdmin;
 use Nails\Factory;
@@ -158,7 +157,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->create($this->getPostObject())) {
 
-                    $oSession = Factory::service('Session', Auth\Constants::MODULE_SLUG);
+                    $oSession = Factory::service('Session');
                     $oSession->setFlashData('success', 'Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
@@ -218,7 +217,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
 
-                    $oSession = Factory::service('Session', Auth\Constants::MODULE_SLUG);
+                    $oSession = Factory::service('Session');
                     $oSession->setFlashData('success', 'Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
@@ -325,7 +324,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oSession = Factory::service('Session', Auth\Constants::MODULE_SLUG);
+        $oSession = Factory::service('Session');
         $oSession->setFlashData($sStatus, $sMessage);
 
         redirect('admin/emaildrip/campaign/index');
