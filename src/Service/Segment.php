@@ -58,7 +58,7 @@ class Segment
      */
     protected function autoLoadSegments(string $sNamespace): void
     {
-        $sClassName = '\\' . $sNamespace . 'EmailDripSegments';
+        $sClassName = $sNamespace . 'EmailDripSegments';
 
         if (class_exists($sClassName)) {
 
