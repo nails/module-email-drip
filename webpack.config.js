@@ -22,12 +22,7 @@ module.exports = {
                             url: false
                         }
                     },
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            plugins: () => [require('autoprefixer')]
-                        }
-                    },
+                    'postcss-loader',
                     'sass-loader'
                 ]
             }
