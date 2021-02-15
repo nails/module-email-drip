@@ -27,7 +27,7 @@ class Campaign extends BaseAdmin
     {
         if (userHasPermission('admin:emaildrip:campaign:manage')) {
 
-            $oNavGroup = Factory::factory('Nav', 'nails/module-admin');
+            $oNavGroup = Factory::factory('Nav', \Nails\Admin\Constants::MODULE_SLUG);
             $oNavGroup->setLabel('Email');
             $oNavGroup->addAction('Manage Drip Campaigns');
 
