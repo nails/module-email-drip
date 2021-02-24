@@ -16,15 +16,8 @@ use Nails\Common\Model\Base;
 
 class CampaignEmail extends Base
 {
-    /**
-     * Construct the model
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->table             = NAILS_DB_PREFIX . 'email_drip_campaign_email';
-        $this->defaultSortColumn = 'order';
-    }
+    const TABLE               = NAILS_DB_PREFIX . 'email_drip_campaign_email';
+    const DEFAULT_SORT_COLUMN = 'order';
 
     // --------------------------------------------------------------------------
 

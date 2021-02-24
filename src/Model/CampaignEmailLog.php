@@ -16,12 +16,5 @@ use Nails\Common\Model\Base;
 
 class CampaignEmailLog extends Base
 {
-    /**
-     * Construct the model
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        $this->table = NAILS_DB_PREFIX . 'email_drip_campaign_email_log';
-    }
+    const TABLE = NAILS_DB_PREFIX . 'email_drip_campaign_email_log';
 }

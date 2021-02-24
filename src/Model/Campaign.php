@@ -16,13 +16,16 @@ use Nails\Common\Model\Base;
 
 class Campaign extends Base
 {
+    const TABLE = NAILS_DB_PREFIX . 'email_drip_campaign';
+
+    // --------------------------------------------------------------------------
+
     /**
      * Model constructor
      **/
     public function __construct()
     {
         parent::__construct();
-        $this->table = NAILS_DB_PREFIX . 'email_drip_campaign';
         $this->addExpandableField([
             'trigger'   => 'emails',
             'type'      => self::EXPANDABLE_TYPE_MANY,
