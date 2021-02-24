@@ -13,6 +13,7 @@
 namespace Nails\EmailDrip\Model;
 
 use Nails\Common\Model\Base;
+use Nails\EmailDrip\Constants;
 
 class Campaign extends Base
 {
@@ -31,7 +32,7 @@ class Campaign extends Base
             'type'      => self::EXPANDABLE_TYPE_MANY,
             'property'  => 'emails',
             'model'     => 'CampaignEmail',
-            'provider'  => 'nails/module-email-drip',
+            'provider'  => Constants::MODULE_SLUG,
             'id_column' => 'campaign_id',
         ]);
     }

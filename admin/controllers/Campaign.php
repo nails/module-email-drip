@@ -13,6 +13,7 @@
 namespace Nails\Admin\EmailDrip;
 
 use Nails\Admin\Helper;
+use Nails\EmailDrip\Constants;
 use Nails\EmailDrip\Controller\BaseAdmin;
 use Nails\Factory;
 
@@ -70,7 +71,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oInput         = Factory::service('Input');
-        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
         $sTableAlias    = $oCampaignModel->getTableAlias();
 
         // --------------------------------------------------------------------------
@@ -142,7 +143,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
 
         // --------------------------------------------------------------------------
 
@@ -193,7 +194,7 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
 
         // --------------------------------------------------------------------------
 
@@ -244,7 +245,7 @@ class Campaign extends BaseAdmin
     {
         //  Load services
         $oAsset          = Factory::service('Asset');
-        $oSegmentService = Factory::service('Segment', 'nails/module-email-drip');
+        $oSegmentService = Factory::service('Segment', Constants::MODULE_SLUG);
 
         //  Load Segments
         $this->data['segments'] = $oSegmentService->getAllFlat();
@@ -253,7 +254,7 @@ class Campaign extends BaseAdmin
         $aEmails = $oItem ? $oItem->email->data : [];
 
         //  @todo (Pablo - 2019-09-13) - Update/Remove/Use minified once JS is refactored to be a module
-        $oAsset->load('admin.campaign.edit.js', 'nails/module-email-drip');
+        $oAsset->load('admin.campaign.edit.js', Constants::MODULE_SLUG);
         $oAsset->inline(
             'ko.applyBindings(new dripCampaignEdit(' . json_encode($aEmails) . '));',
             'JS'
@@ -302,7 +303,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oUri           = Factory::service('Uri');
-        $oCampaignModel = Factory::model('Campaign', 'nails/module-email-drip');
+        $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
         $oCampaign      = $oCampaignModel->getById($oUri->segment(5));
 
         if (!$oCampaign) {

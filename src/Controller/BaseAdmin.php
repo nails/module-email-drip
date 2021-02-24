@@ -13,6 +13,7 @@
 namespace Nails\EmailDrip\Controller;
 
 use Nails\Admin\Controller\Base;
+use Nails\EmailDrip\Constants;
 use Nails\Factory;
 
 class BaseAdmin extends Base
@@ -21,6 +22,6 @@ class BaseAdmin extends Base
     {
         parent::__construct();
         $oAsset = Factory::service('Asset');
-        $oAsset->load('admin.min.css', 'nails/module-email-drip');
+        $oAsset->load('admin.min.css', Constants::MODULE_SLUG);
     }
 }
