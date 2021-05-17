@@ -9,7 +9,7 @@
         "autoprefixer": "^10.2",
         "css-loader": "^5.2",
         "mini-css-extract-plugin": "^1.6",
-        "postcss-loader": "^5.2",
+        "postcss-loader": "^5.3",
         "sass": "^1.32",
         "sass-loader": "^11.1",
         "webpack": "^5.37",
