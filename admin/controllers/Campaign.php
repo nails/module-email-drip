@@ -158,8 +158,8 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->create($this->getPostObject())) {
 
-                    $oSession = Factory::service('Session');
-                    $oSession->setFlashData('success', 'Successfully created drip campaign.');
+                    $oUserFeedback = Factory::service('UserFeedback');
+                    $oUserFeedback->success('Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
@@ -218,8 +218,8 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
 
-                    $oSession = Factory::service('Session');
-                    $oSession->setFlashData('success', 'Successfully updated drip campaign.');
+                    $oUserFeedback = Factory::service('UserFeedback');
+                    $oUserFeedback->success('Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
@@ -303,6 +303,7 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oUri           = Factory::service('Uri');
+        $oUserFeedback  = Factory::service('UserFeedback');
         $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
         $oCampaign      = $oCampaignModel->getById($oUri->segment(5));
 
@@ -313,20 +314,13 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         if ($oCampaignModel->delete($oCampaign->id)) {
-
-            $sStatus  = 'success';
-            $sMessage = 'Successfully deleted campaign.';
+            $oUserFeedback->success('Successfully deleted campaign.');
 
         } else {
-
-            $sStatus  = 'error';
-            $sMessage = 'Failed to delete campaign. ' . $oCampaignModel->lastError();
+            $oUserFeedback->error('Failed to delete campaign. ' . $oCampaignModel->lastError());
         }
 
         // --------------------------------------------------------------------------
-
-        $oSession = Factory::service('Session');
-        $oSession->setFlashData($sStatus, $sMessage);
 
         redirect('admin/emaildrip/campaign/index');
     }
