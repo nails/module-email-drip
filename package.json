@@ -12,7 +12,7 @@
         "postcss-loader": "^6.1",
         "sass": "^1.39",
         "sass-loader": "^12.1",
-        "webpack": "^5.51",
+        "webpack": "^5.52",
         "webpack-cli": "^4.8"
     },
     "scripts": {
