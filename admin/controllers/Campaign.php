@@ -157,19 +157,15 @@ class Campaign extends BaseAdmin
             if ($this->formValidation()) {
 
                 if ($oCampaignModel->create($this->getPostObject())) {
-
-                    $oUserFeedback = Factory::service('UserFeedback');
-                    $oUserFeedback->success('Successfully created drip campaign.');
+                    $this->oUserFeedback->success('Successfully created drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
-
-                    $this->data['error'] = 'Failed to create drip campaign. ' . $oCampaignModel->lastError();
+                    $this->oUserFeedback->error('Failed to create drip campaign. ' . $oCampaignModel->lastError());
                 }
 
             } else {
-
-                $this->data['error'] = lang('fv_there_were_errors');
+                $this->oUserFeedback->error(lang('fv_there_were_errors'));
             }
         }
 
@@ -217,19 +213,15 @@ class Campaign extends BaseAdmin
             if ($this->formValidation()) {
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
-
-                    $oUserFeedback = Factory::service('UserFeedback');
-                    $oUserFeedback->success('Successfully updated drip campaign.');
+                    $this->oUserFeedback->success('Successfully updated drip campaign.');
                     redirect('admin/emaildrip/campaign/index');
 
                 } else {
-
-                    $this->data['error'] = 'Failed to update campaign. ' . $oCampaignModel->lastError();
+                    $this->oUserFeedback->error('Failed to update campaign. ' . $oCampaignModel->lastError());
                 }
 
             } else {
-
-                $this->data['error'] = lang('fv_there_were_errors');
+                $this->oUserFeedback->error(lang('fv_there_were_errors'));
             }
         }
 
@@ -303,7 +295,6 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         $oUri           = Factory::service('Uri');
-        $oUserFeedback  = Factory::service('UserFeedback');
         $oCampaignModel = Factory::model('Campaign', Constants::MODULE_SLUG);
         $oCampaign      = $oCampaignModel->getById($oUri->segment(5));
 
@@ -314,10 +305,10 @@ class Campaign extends BaseAdmin
         // --------------------------------------------------------------------------
 
         if ($oCampaignModel->delete($oCampaign->id)) {
-            $oUserFeedback->success('Successfully deleted campaign.');
+            $this->oUserFeedback->success('Successfully deleted campaign.');
 
         } else {
-            $oUserFeedback->error('Failed to delete campaign. ' . $oCampaignModel->lastError());
+            $this->oUserFeedback->error('Failed to delete campaign. ' . $oCampaignModel->lastError());
         }
 
         // --------------------------------------------------------------------------
