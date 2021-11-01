@@ -7,7 +7,7 @@
     "repository": "https://github.com/nails/module-email-drip",
     "devDependencies": {
         "autoprefixer": "^10.4",
-        "css-loader": "^6.4",
+        "css-loader": "^6.5",
         "mini-css-extract-plugin": "^2.4",
         "postcss-loader": "^6.2",
         "sass": "^1.43",
