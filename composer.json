@@ -27,9 +27,9 @@
     "prefer-stable": true,
     "require":
     {
-        "nails/common": "dev-develop",
-        "nails/module-email": "dev-develop",
-        "nails/module-cron": "dev-develop"
+        "nails/common": "dev-feature/pre-new-admin",
+        "nails/module-email": "dev-feature/pre-new-admin",
+        "nails/module-cron": "dev-feature/pre-new-admin"
     },
     "require-dev": {
         "phpunit/phpunit": "9.*",
