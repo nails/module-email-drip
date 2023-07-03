@@ -28,8 +28,9 @@
     "require":
     {
         "nails/common": "dev-feature/pre-new-admin",
-        "nails/module-email": "dev-feature/pre-new-admin",
-        "nails/module-cron": "dev-feature/pre-new-admin"
+        "nails/module-admin": "dev-feature/pre-new-admin",
+        "nails/module-cron": "dev-feature/pre-new-admin",
+        "nails/module-email": "dev-feature/pre-new-admin"
     },
     "require-dev": {
         "phpunit/phpunit": "9.*",
