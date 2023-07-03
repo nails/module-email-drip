@@ -28,8 +28,9 @@
     "require":
     {
         "nails/common": "dev-develop",
-        "nails/module-email": "dev-develop",
-        "nails/module-cron": "dev-develop"
+        "nails/module-admin": "dev-develop",
+        "nails/module-cron": "dev-develop",
+        "nails/module-email": "dev-develop"
     },
     "require-dev": {
         "phpunit/phpunit": "9.*",

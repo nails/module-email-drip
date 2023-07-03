@@ -1,5 +1,11 @@
 parameters:
-    level: 0
+    level: 5
     paths:
         - ../src
         - ../tests
+    bootstrapFiles:
+        - constants.php
+    scanFiles:
+        - ../vendor/nails/common/helpers/array.php
+        - ../vendor/nails/common/helpers/debug.php
+        - ../vendor/nails/common/helpers/string.php

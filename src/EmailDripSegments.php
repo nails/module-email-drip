@@ -18,8 +18,8 @@ class EmailDripSegments
      * All registered users
      * @return array
      */
-    public function allUser()
+    public function allUser(): array
     {
-        dumpanddie('test');
+        return [];
     }
 }
