@@ -10,7 +10,7 @@
         "css-loader": "^7.1",
         "mini-css-extract-plugin": "^2.9",
         "postcss-loader": "^8.1",
-        "sass": "^1.76",
+        "sass": "^1.77",
         "sass-loader": "^14.2",
         "webpack": "^5.91",
         "webpack-cli": "^5.1"
