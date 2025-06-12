@@ -12,6 +12,7 @@
 
 namespace Nails\Admin\EmailDrip;
 
+use Nails\Admin\Factory\Nav;
 use Nails\Admin\Helper;
 use Nails\EmailDrip\Constants;
 use Nails\EmailDrip\Controller\BaseAdmin;
@@ -21,19 +22,16 @@ class Campaign extends BaseAdmin
 {
     /**
      * Announces this controller's navGroups
-     *
-     * @return stdClass
      */
-    public static function announce()
+    public static function announce(): Nav|array|null
     {
         if (userHasPermission('admin:emaildrip:campaign:manage')) {
-
             $oNavGroup = Factory::factory('Nav', \Nails\Admin\Constants::MODULE_SLUG);
             $oNavGroup->setLabel('Email');
             $oNavGroup->addAction('Manage Drip Campaigns');
-
-            return $oNavGroup;
         }
+
+        return $oNavGroup ?? null;
     }
 
     // --------------------------------------------------------------------------
