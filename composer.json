@@ -27,6 +27,7 @@
     "prefer-stable": true,
     "require":
     {
+        "php": ">=8.3",
         "nails/common": "dev-develop",
         "nails/module-admin": "dev-develop",
         "nails/module-cron": "dev-develop",
