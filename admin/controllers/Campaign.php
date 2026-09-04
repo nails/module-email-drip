@@ -260,13 +260,18 @@ class Campaign extends BaseAdmin
      */
     protected function formValidation()
     {
-        $oFormValidation = Factory::service('FormValidation');
-
-        $oFormValidation->set_rules('quote', '', '');
-
-        $oFormValidation->set_message('required', lang('fv_required'));
-
-        return $oFormValidation->run();
+        /**
+         * No rules are currently applied to the campaign form; override this
+         * method to add some, e.g.:
+         *
+         *     Factory::service('FormValidation')
+         *         ->buildValidator(['quote' => [FormValidation::RULE_REQUIRED]])
+         *         ->run();
+         *
+         * Note: the previous implementation declared an empty rule for `quote`
+         * (a no-op) and so never validated successfully.
+         */
+        return true;
     }
 
     // --------------------------------------------------------------------------
