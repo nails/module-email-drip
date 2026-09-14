@@ -43,7 +43,8 @@
     },
     "scripts": {
         "test": "./vendor/bin/phpunit",
-        "analyse": "./vendor/bin/phpstan analyse -c .phpstan/config.neon"
+        "analyse": "./vendor/bin/phpstan analyse -c .phpstan/config.neon",
+        "check-migrations": "php vendor/nails/common/scripts/check-migration-numbering.php"
     },
     "autoload": {
         "psr-4": {
