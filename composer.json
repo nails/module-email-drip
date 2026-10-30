@@ -38,6 +38,7 @@
         "nails/module-email": "dev-feature/pre-new-admin"
     },
     "require-dev": {
+        "nails/module-find-replace": "dev-feature/pre-new-admin",
         "phpunit/phpunit": "^12.0",
         "phpstan/phpstan": "^2.0"
     },
