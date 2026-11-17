@@ -100,7 +100,7 @@ class Campaign extends BaseAdmin
         //  Add a header button
         if (userHasPermission(Permission\Campaign\Create::class)) {
             Helper::addHeaderButton(
-                'admin/emaildrip/campaign/create',
+                static::url('create'),
                 'Create Drip Campaign'
             );
         }
