@@ -40,17 +40,17 @@
                             <td class="actions">
                                 <?php
 
-                                if (userHasPermission('admin:emaildrip:campaign:edit')) {
+                                if (userHasPermission(\Nails\EmailDrip\Admin\Permission\Campaign\Edit::class)) {
                                     echo anchor(
-                                        'admin/emaildrip/campaign/edit/' . $oCampaign->id,
+                                        \Nails\EmailDrip\Admin\Controller\Campaign::url('edit/' . $oCampaign->id),
                                         lang('action_edit'),
                                         'class="btn btn-xs btn-primary"'
                                     );
                                 }
 
-                                if (userHasPermission('admin:emaildrip:campaign:delete')) {
+                                if (userHasPermission(\Nails\EmailDrip\Admin\Permission\Campaign\Delete::class)) {
                                     echo anchor(
-                                        'admin/emaildrip/campaign/delete/' . $oCampaign->id,
+                                        \Nails\EmailDrip\Admin\Controller\Campaign::url('delete/' . $oCampaign->id),
                                         lang('action_delete'),
                                         'class="btn btn-xs btn-danger confirm" data-body="You cannot undo this action"'
                                     );

@@ -10,10 +10,11 @@
  * @link
  */
 
-namespace Nails\Admin\EmailDrip;
+namespace Nails\EmailDrip\Admin\Controller;
 
 use Nails\Admin\Factory\Nav;
 use Nails\Admin\Helper;
+use Nails\EmailDrip\Admin\Permission;
 use Nails\EmailDrip\Constants;
 use Nails\EmailDrip\Controller\BaseAdmin;
 use Nails\Factory;
@@ -27,7 +28,7 @@ class Campaign extends BaseAdmin
      */
     public static function announce(): Nav|array|null
     {
-        if (userHasPermission('admin:emaildrip:campaign:manage')) {
+        if (userHasPermission(Permission\Campaign\Browse::class)) {
             $oNavGroup = Factory::factory('Nav', \Nails\Admin\Constants::MODULE_SLUG);
             $oNavGroup->setLabel('Email');
             $oNavGroup->addAction('Manage Drip Campaigns');
@@ -39,32 +40,13 @@ class Campaign extends BaseAdmin
     // --------------------------------------------------------------------------
 
     /**
-     * Returns an array of extra permissions for this controller
-     *
-     * @return array
-     */
-    public static function permissions(): array
-    {
-        $permissions = parent::permissions();
-
-        $permissions['manage'] = 'Can manage drip campaigns';
-        $permissions['create'] = 'Can create drip campaigns';
-        $permissions['edit']   = 'Can edit drip campaigns';
-        $permissions['delete'] = 'Can delete drip campaigns';
-
-        return $permissions;
-    }
-
-    // --------------------------------------------------------------------------
-
-    /**
      * Browse drip campaigns
      *
      * @return void
      */
     public function index()
     {
-        if (!userHasPermission('admin:emaildrip:campaign:manage')) {
+        if (!userHasPermission(Permission\Campaign\Browse::class)) {
             unauthorised();
         }
 
@@ -116,7 +98,7 @@ class Campaign extends BaseAdmin
         $this->data['pagination'] = Helper::paginationObject($page, $perPage, $totalRows);
 
         //  Add a header button
-        if (userHasPermission('admin:emaildrip:campaign:create')) {
+        if (userHasPermission(Permission\Campaign\Create::class)) {
             Helper::addHeaderButton(
                 'admin/emaildrip/campaign/create',
                 'Create Drip Campaign'
@@ -137,7 +119,7 @@ class Campaign extends BaseAdmin
      */
     public function create()
     {
-        if (!userHasPermission('admin:emaildrip:campaign:create')) {
+        if (!userHasPermission(Permission\Campaign\Create::class)) {
             unauthorised();
         }
 
@@ -158,7 +140,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->create($this->getPostObject())) {
                     $this->oUserFeedback->success('Successfully created drip campaign.');
-                    redirect('admin/emaildrip/campaign/index');
+                    redirect(static::url());
 
                 } else {
                     $this->oUserFeedback->error('Failed to create drip campaign. ' . $oCampaignModel->lastError());
@@ -184,7 +166,7 @@ class Campaign extends BaseAdmin
      */
     public function edit()
     {
-        if (!userHasPermission('admin:emaildrip:campaign:edit')) {
+        if (!userHasPermission(Permission\Campaign\Edit::class)) {
             unauthorised();
         }
 
@@ -214,7 +196,7 @@ class Campaign extends BaseAdmin
 
                 if ($oCampaignModel->update($this->data['campaign']->id, $this->getPostObject())) {
                     $this->oUserFeedback->success('Successfully updated drip campaign.');
-                    redirect('admin/emaildrip/campaign/index');
+                    redirect(static::url());
 
                 } else {
                     $this->oUserFeedback->error('Failed to update campaign. ' . $oCampaignModel->lastError());
@@ -293,7 +275,7 @@ class Campaign extends BaseAdmin
      */
     public function delete()
     {
-        if (!userHasPermission('admin:emaildrip:campaign:delete')) {
+        if (!userHasPermission(Permission\Campaign\Delete::class)) {
             unauthorised();
         }
 
@@ -318,6 +300,6 @@ class Campaign extends BaseAdmin
 
         // --------------------------------------------------------------------------
 
-        redirect('admin/emaildrip/campaign/index');
+        redirect(static::url());
     }
 }
